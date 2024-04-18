@@ -7,6 +7,7 @@ import {HomeComponent} from "./home/home.component";
 import {AboutComponent} from "./about/about.component";
 import {NgOptimizedImage} from "@angular/common";
 import {AppRoutingModule} from "./app.routing.module";
+import {DemoModule} from "./demo/demo.module";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {AppRoutingModule} from "./app.routing.module";
     SharedModule,
     PagesModule,
     NgOptimizedImage,
-    AppRoutingModule
+    AppRoutingModule,
+    DemoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

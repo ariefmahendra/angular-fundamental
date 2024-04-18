@@ -3,5 +3,16 @@
   <h1 class="display-5 fw-bold">Tentang</h1>
   <div class="col-lg-6 mx-auto">
     <p class="lead mb-4">Enigma App adalah ...</p>
+    <hr>
+    <h5>Passing data with event binding</h5>
+    <input
+    type="text"
+    class="form-control"
+    placeholder="Masukkan nama anda disini"
+    id="name"
+    (input)="onKeyPress($event)"
+    >
+
+    <p class="mt-5">Nama : {{name}}</p>
   </div>
 </div>

@@ -6,7 +6,7 @@ import {AboutComponent} from "./about/about.component";
 const routes: Routes = [
   // eager load => akan dipanggil ketika sebelum aplikasi berjalan
   {
-    path: '',
+    path: 'home',
     component: HomeComponent,
   },
   {

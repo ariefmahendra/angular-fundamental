@@ -1,0 +1,7 @@
+<h1>PARENT COMPONENT</h1>
+<input type="text" class="form-control" #box placeholder="input your name"/>
+<button (click)="getData(box.value)" class="btn btn-primary mt-2">Pass the Name</button>
+<p>Data from child Component (Title) : {{title}} </p>
+
+<!-- Passing the form data to the child component(child) -->
+<app-child [name]="name" (nameCreated)="onNameChange($event)"></app-child>

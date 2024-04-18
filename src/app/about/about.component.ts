@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AboutComponent {
 
+
+  // passing data with event
+  name: string = '';
+
+  onKeyPress(event: Event): void {
+    this.name = (<HTMLInputElement>event.target).value
+  }
+
 }
+
