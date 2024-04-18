@@ -1,11 +1,15 @@
 import {RouterModule, Routes} from "@angular/router";
 import {NgModule} from "@angular/core";
-import {TodosComponent} from "./todos/todos.component";
+
+/**
+ * command untuk sekaligus membuat route ke child nya dengan konsep lazy load
+ * $ ng g m pages/todos --route todos --module pages.module
+ */
 
 const routes: Routes = [
   {
-    path: '',
-    component: TodosComponent,
+    path: 'todos',
+    loadChildren: () => import('./todos/todos.module').then(m => m.TodosModule)
   }
 ]
 

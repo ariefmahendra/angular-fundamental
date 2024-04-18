@@ -16,7 +16,7 @@ const routes: Routes = [
 
   // lazy load => akan berjalan setelah aplikasi berjalan
   {
-    path: 'todos',
+    path: 'pages',
     loadChildren: () => import("./pages/pages.module").then(m => m.PagesModule)
   }
 ]
