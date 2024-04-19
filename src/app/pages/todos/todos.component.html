@@ -2,6 +2,7 @@
   <div class="col">
     <app-todo-list
       [list]="todos"
+      (toggleTodo)="onToggleTodo()"
     ></app-todo-list>
   </div>
   <div class="col">

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Todo} from "../../models/todo.model";
 
 @Component({
@@ -7,5 +7,16 @@ import {Todo} from "../../models/todo.model";
   styleUrl: './todo-list.component.scss'
 })
 export class TodoListComponent {
-  @Input() list: Todo[] = [];
+  @Input() list: Todo[] = []
+  @Output() toggleTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
+  @Output() editTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
+
+  onCheckTodo(todo: Todo): void { 
+    todo.isDone = !todo.isDone;
+    this.toggleTodo.emit(todo);
+  }
+
+  onSelectTodo(todo?: Todo): void {
+    this.editTodo.emit(todo);
+  }
 }

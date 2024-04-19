@@ -20,7 +20,7 @@ export class TodoFormComponent {
 
   onSubmit(){
     this.saveTodo.emit(this.todoForm.value);
-    console.log("save todo: ", this.todoForm.value);
     this.todoForm.reset();
   }
+
 }
