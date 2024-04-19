@@ -1,8 +1,13 @@
 <div class="row mt-5">
   <div class="col">
-    <app-todo-list></app-todo-list>
+    <app-todo-list
+      [list]="todos"
+    ></app-todo-list>
   </div>
   <div class="col">
-    <app-todo-form></app-todo-form>
+    <app-todo-form
+      [todo]="todo"
+      (saveTodo)="onSaveTodo($event)"
+    ></app-todo-form>
   </div>
 </div>
