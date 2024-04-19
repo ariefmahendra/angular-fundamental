@@ -10,7 +10,10 @@ import {Todo} from "../../models/todo.model";
 export class TodoFormComponent {
 
   @Input() todo?: Todo;
-  @Output() saveTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
+  // @Output() saveTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
+
+  // penerapan two way binding
+  @Output() todoChange: EventEmitter<Todo> = new EventEmitter<Todo>();
 
   isAdded: boolean = false;
   message: string = 'No todo added yet';
@@ -22,7 +25,7 @@ export class TodoFormComponent {
   })
 
   onSubmit(){
-    this.saveTodo.emit(this.todoForm.value);
+    this.todoChange.emit(this.todoForm.value);
     this.todoForm.reset();
     this.isAdded = true;
     this.message = 'Todo added successfully';

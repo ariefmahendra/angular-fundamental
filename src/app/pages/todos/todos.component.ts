@@ -8,8 +8,16 @@ import {Todo} from "./models/todo.model";
 })
 export class TodosComponent implements OnInit{
 
-  todos: Todo[] = [];
-  todo?: Todo;
+  todos: Todo[] = []; // buat nangkep list
+  todoValue?: Todo; // buat nangkep edit atau hapus
+
+  get todo(): Todo {
+    return this.todoValue as Todo;
+  }
+
+  set todo(todo : Todo) {
+    this.onSaveTodo(todo);
+  }  
 
   ngOnInit(): void {
     this.initTodo();
@@ -48,16 +56,37 @@ export class TodosComponent implements OnInit{
   }
 
   onSaveTodo(todo: Todo): void {
-    todo.id = this.todos.length + 1;
-    this.todos.push(todo)
-    sessionStorage.setItem('todos', JSON.stringify(this.todos));
+    console.log("onsavetodo");
+    
+    if (this.todoValue) {
+      this.todos = this.todos.map((item: Todo) => {
+        if (todo.id === item.id) {
+            item = {...todo, ...item};
+        }
+        return item;
+      })
+      sessionStorage.setItem('todos', JSON.stringify(this.todos));
+    } else {
+      todo.id = this.todos.length + 1;
+      this.todos.push(todo)
+      sessionStorage.setItem('todos', JSON.stringify(this.todos));  
+    }
+  }
+
+  onEditTodo(todo: Todo): void {
+    this.todoValue = todo;
   }
 
   onToggleTodo(): void {
     sessionStorage.setItem('todos', JSON.stringify(this.todos));
   }
 
-  onEditTodo(todo: Todo): void {
-    
+  onDeleteTodo(todo: Todo): void {
+    if (todo.isDone) {
+      alert('todo ini tidak boleh dihapus karena sudah selesai');
+    } else {
+      this.todos.splice(1, 1);
+      sessionStorage.setItem('todos', JSON.stringify(this.todos));
+    }
   }
 }

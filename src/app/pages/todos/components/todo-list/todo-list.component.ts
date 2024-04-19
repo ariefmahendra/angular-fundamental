@@ -10,6 +10,7 @@ export class TodoListComponent {
   @Input() list: Todo[] = []
   @Output() toggleTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
   @Output() editTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
+  @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
 
   onCheckTodo(todo: Todo): void { 
     todo.isDone = !todo.isDone;

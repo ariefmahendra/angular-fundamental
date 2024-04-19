@@ -34,7 +34,7 @@
 
     <ng-template #noTodoAdded>
       <div class="alert alert-warning alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ message }}
+        {{ message | lowercase }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     </ng-template>
