@@ -12,6 +12,9 @@ export class TodoFormComponent {
   @Input() todo?: Todo;
   @Output() saveTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
 
+  isAdded: boolean = false;
+  message: string = 'No todo added yet';
+
   todoForm: FormGroup = new FormGroup({
     id: new FormControl(null),
     title: new FormControl(null),
@@ -21,6 +24,8 @@ export class TodoFormComponent {
   onSubmit(){
     this.saveTodo.emit(this.todoForm.value);
     this.todoForm.reset();
+    this.isAdded = true;
+    this.message = 'Todo added successfully';
   }
 
 }
