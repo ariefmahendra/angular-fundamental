@@ -45,7 +45,7 @@ export class TodoService {
     const todoValue: string = sessionStorage.getItem('todos') as string;
     try {
       const todos: Todo[] = JSON.parse(todoValue);
-      const filteredTodo: Todo[] = todos.filter(todo => todo.id = id);
+      const filteredTodo: Todo[] = todos.filter(todo => todo.id != id);
       sessionStorage.setItem('todos', JSON.stringify(filteredTodo));
     } catch (error){
       console.log(error);
