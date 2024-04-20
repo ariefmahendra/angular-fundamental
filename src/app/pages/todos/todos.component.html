@@ -1,15 +1,8 @@
 <div class="row mt-5">
   <div class="col">
-    <app-todo-list
-      [list]="todos"
-      (toggleTodo)="onToggleTodo()"
-      (editTodo)="onEditTodo($event)"
-      (deleteTodo)="onDeleteTodo($event)"
-    ></app-todo-list>
+    <app-todo-list></app-todo-list>
   </div>
   <div class="col">
-    <app-todo-form
-      [(todo)]="todo"
-    ></app-todo-form>
+    <app-todo-form></app-todo-form>
   </div>
 </div>

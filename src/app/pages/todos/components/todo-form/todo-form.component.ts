@@ -1,22 +1,21 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {Todo} from "../../models/todo.model";
+import {TodoService} from "../../services/todo.service";
 
 @Component({
   selector: 'app-todo-form',
   templateUrl: './todo-form.component.html',
   styleUrl: './todo-form.component.scss'
 })
-export class TodoFormComponent {
-
-  @Input() todo?: Todo;
-  // @Output() saveTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
-
-  // penerapan two way binding
-  @Output() todoChange: EventEmitter<Todo> = new EventEmitter<Todo>();
-
+export class TodoFormComponent implements OnChanges{
   isAdded: boolean = false;
   message: string = 'No todo added yet';
+
+  constructor(
+    private readonly todoService: TodoService,
+  ) {
+  }
 
   todoForm: FormGroup = new FormGroup({
     id: new FormControl(null),
@@ -25,10 +24,19 @@ export class TodoFormComponent {
   })
 
   onSubmit(){
-    this.todoChange.emit(this.todoForm.value);
+    const todo = this.todoForm.value;
+    this.todoService.saveTodo(todo);
+    this.isAlert();
     this.todoForm.reset();
+  }
+
+  ngOnChanges(): void {
+
+  }
+
+  isAlert(): void{
     this.isAdded = true;
-    this.message = 'Todo added successfully';
+    this.message = 'Todo berhasil ditambahkan';
   }
 
 }

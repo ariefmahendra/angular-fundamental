@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { TodoService } from '../../services/todo.service';
+import { Component, OnInit } from '@angular/core';
 import {Todo} from "../../models/todo.model";
 
 @Component({
@@ -6,18 +7,36 @@ import {Todo} from "../../models/todo.model";
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.scss'
 })
-export class TodoListComponent {
-  @Input() list: Todo[] = []
-  @Output() toggleTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
-  @Output() editTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
-  @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
+export class TodoListComponent implements OnInit{
+  constructor(
+    private readonly todoService: TodoService
+  ){
 
-  onCheckTodo(todo: Todo): void { 
-    todo.isDone = !todo.isDone;
-    this.toggleTodo.emit(todo);
+  }
+  ngOnInit(): void {
+    this.getAllTodo();
   }
 
-  onSelectTodo(todo?: Todo): void {
-    this.editTodo.emit(todo);
+  todos: Todo[] | undefined =[];
+
+  public getAllTodo(){
+    try {
+      this.todos = this.todoService.getAll();
+    } catch(error){
+      console.log(error);
+    }
+  }
+
+  onCheckTodo(todo: Todo): void {
+    this.todoService.checkedTodo(todo);
+  }
+
+  onSelectTodo(todo: Todo): void {
+    const todoById = this.todoService.getTodoById(todo.id);
+    console.log(todoById);
+  }
+
+  onDeleteTodo(todo: Todo): void{
+    this.todoService.deleteTodo(todo.id);
   }
 }
