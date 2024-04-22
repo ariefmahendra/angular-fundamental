@@ -6,7 +6,7 @@ import {PagesModule} from "./pages/pages.module";
 import {HomeComponent} from "./home/home.component";
 import {AboutComponent} from "./about/about.component";
 import {NgOptimizedImage} from "@angular/common";
-import {AppRoutingModule} from "./app.routing.module";
+import {AppRoutingModule} from "./app-routing.module";
 import {DemoModule} from "./demo/demo.module";
 
 
@@ -14,17 +14,18 @@ import {DemoModule} from "./demo/demo.module";
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent,
+    AboutComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     SharedModule,
     PagesModule,
     NgOptimizedImage,
-    AppRoutingModule,
-    DemoModule
+    DemoModule,
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

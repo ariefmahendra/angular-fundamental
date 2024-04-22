@@ -17,7 +17,7 @@ export class TodoListComponent implements OnInit{
     this.getAllTodo();
   }
 
-  todos: Todo[] | undefined =[];
+  todos: Todo[] =[];
 
   public getAllTodo(){
     try {
@@ -29,11 +29,6 @@ export class TodoListComponent implements OnInit{
 
   onCheckTodo(todo: Todo): void {
     this.todoService.checkedTodo(todo);
-  }
-
-  onSelectTodo(todo: Todo): void {
-    const todoById = this.todoService.getTodoById(todo.id);
-    console.log(todoById);
   }
 
   onDeleteTodo(todo: Todo): void{

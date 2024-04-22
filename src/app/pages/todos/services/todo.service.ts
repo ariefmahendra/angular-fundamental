@@ -42,22 +42,20 @@ export class TodoService {
   }
 
   public deleteTodo(id: number){
-    const todoValue: string = sessionStorage.getItem('todos') as string;
     try {
-      const todos: Todo[] = JSON.parse(todoValue);
-      const filteredTodo: Todo[] = todos.filter(todo => todo.id != id);
-      sessionStorage.setItem('todos', JSON.stringify(filteredTodo));
-    } catch (error){
-      console.log(error);
+      const todoId: number = this.todos.findIndex(item => item.id === id);
+      this.todos.splice(todoId, 1);
+      this.updateSession();
+    }catch (err){
+      console.log(err);
     }
   }
 
-  public getTodoById(id: number): Todo | undefined{
+  public getTodoById(id: number): Todo {
     try {
-      return this.todos.find(todo => todo.id === id);
-    } catch (err){
+      return this.todos.find(item => item.id === id);
+    } catch (err) {
       console.log(err);
-      return undefined;
     }
   }
 

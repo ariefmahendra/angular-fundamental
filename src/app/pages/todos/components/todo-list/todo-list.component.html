@@ -8,21 +8,21 @@
           type="checkbox"
           id="{{todo.id}}_checkbox"
           [value]="todo.id"
-          [checked]="todo.isDone" 
+          [checked]="todo.isDone"
           (click)="onCheckTodo(todo)"
         >
         <label for="{{todo.id}}_checkbox" class="form-check-label">{{todo.title}}</label>
-        <button 
-          class="btn btn-link btn-sm float-end"
-          (click)="onSelectTodo(todo)"
-        >
-        Edit
-        </button>
-        <button 
+        <button
           class="btn btn-link btn-sm float-end"
           (click)="onDeleteTodo(todo)"
         >
         Delete
+        </button>
+        <button
+          class="btn btn-link btn-sm float-end"
+          routerLink="/pages/todos/{{todo.id}}"
+        >
+          Edit
         </button>
       </div>
     </li>

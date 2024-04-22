@@ -1,0 +1,32 @@
+### REGISTER
+POST http://localhost:3000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "email": "ariefmahendra@gmail.com",
+    "password": "123456"
+}
+
+### LOGIN
+POST http://localhost:3000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "ariefmahendra@gmail.com",
+    "password": "123456"
+}
+
+### Get All Todo
+GET http://localhost:3000/api/v1/todos
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyaWVmbWFoZW5kcmFAZ21haWwuY29tIn0.ekU5xdaufcIt-yX0Wzl-Cp_L7SZbf-x3JJDoSYVKT8c
+
+### Create Todo
+POST http://localhost:3000/api/v1/todos
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFyaWVmbWFoZW5kcmFAZ21haWwuY29tIn0.ekU5xdaufcIt-yX0Wzl-Cp_L7SZbf-x3JJDoSYVKT8c
+
+{
+    "name": "sample",
+    "isCompleted" : false
+}
