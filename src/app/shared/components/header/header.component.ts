@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  isLoggedIn(): boolean {
+    return (sessionStorage.getItem('token') !== null);
+  }
 }

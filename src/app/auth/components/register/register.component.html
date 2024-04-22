@@ -1,20 +1,35 @@
 <div class="row mt-5 justify-content-center">
     <div class="col-md-6">
+      <div
+        *ngIf="alertIsShow"
+        class="alert alert-{{alert.status}} alert-dismissible fade show"
+        role="alert"
+      >
+        {{alert.text}}
+        <button type="button" class="btn-close" data-bs-dismis="alert" aria-label="close" (click)="alertIsShow=false"></button>
+      </div>
         <h2 class="text-center">Register</h2>
-        <form>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <input
+                type="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                formControlName="email"
+              >
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+              <input
+                type="password"
+                class="form-control"
+                id="exampleInputPassword1"
+                formControlName="password"
+              >
             </div>
-            <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary">Register</button>
             <span class="text-secondary m-2">Sudah punya akun ?</span> <a routerLink="/auth/login">Login</a>
           </form>
     </div>
