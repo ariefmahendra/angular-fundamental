@@ -35,16 +35,17 @@ export class TodoFormComponent implements OnInit{
     this.isAlert();
     this.todoForm.reset();
   }
-ngOnInit(): void {
-  this.activatedRoute.params.pipe(
-    map((params: Params) => {
-      return params['id'] ? Number(params['id']) : null
+
+  ngOnInit(): void {
+    this.activatedRoute.params.pipe(
+      map((params: Params) => {
+        return params['id'] ? Number(params['id']) : null
+      })
+    ).subscribe(id => {
+      this.todo = this.todoService.getTodoById(id);
+      this.setFormValue()
     })
-  ).subscribe(id => {
-    this.todo = this.todoService.getTodoById(id);
-    this.setFormValue()
-  })
-}
+  }
 
   setFormValue():void{
     if (this.todo) {

@@ -1,0 +1,30 @@
+<h3>Todo List</h3>
+<div class="card" >
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let todo of todos">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="{{todo.id}}_checkbox"
+          [value]="todo.id"
+          [checked]="todo.isCompleted"
+        >
+        <label for="{{todo.id}}_checkbox" class="form-check-label">{{todo.name}}</label>
+        <button
+          class="btn btn-link btn-sm float-end"
+          (click)="onDeleteTodo(todo)"
+        >
+          Delete
+        </button>
+        <button
+          class="btn btn-link btn-sm float-end"
+          routerLink="/pages/todo-api/{{todo.id}}"
+        >
+          Edit
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
+

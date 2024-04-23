@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'todos',
     loadChildren: () => import('./todos/todos.module').then(m => m.TodosModule)
+  },
+  {
+    path: 'todo-api',
+    loadChildren: () => import('./todo-api/todo-api.module').then(m => m.TodoApiModule)
   }
 ]
 
