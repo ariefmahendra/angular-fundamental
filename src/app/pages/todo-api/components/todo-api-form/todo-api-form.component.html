@@ -19,28 +19,22 @@
           aria-describedby="basic-addon1"
           formControlName="name"
         >
-        <button
-          type="submit"
-          class="btn btn-outline-primary"
-          *ngIf="isAdded; else notAdded"
-        >
-          UPDATE
-        </button>
+        <div *ngIf="isAdded; else notAdded">
+          <button type="submit" class="btn btn-outline-primary">
+            UPDATE
+          </button>
+          <button class="btn btn-outline-primary" routerLink="/pages/todo-api">
+            NEW
+          </button>
+        </div>
       </div>
       <ng-template #notAdded>
         <button class="btn btn-outline-primary" type="submit">ADD</button>
       </ng-template>
     </form>
-    <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="isAdded; else noTodoAdded"  style="margin-top: 10px;">
+    <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="alertIsShow"  style="margin-top: 10px;">
       <strong>Hore!</strong> {{ message }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="alertIsShow=false"></button>
     </div>
-
-    <ng-template #noTodoAdded>
-      <div class="alert alert-warning alert-dismissible fade show" role="alert" style="margin-top: 10px;">
-        {{ message | lowercase }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    </ng-template>
   </div>
 </div>

@@ -21,17 +21,11 @@ export class TodoApiListComponent implements OnInit, OnDestroy{
   ) {}
 
   ngOnInit(): void {
+    this.getAllTodos();
     this.subscription = this.commonService.getUpdate()
       .subscribe(
-        {
-          next: value => {
-            console.log(value);
-            this.getAllTodos();
-          }
-        }
+        {next: () => this.getAllTodos()}
       );
-
-    this.getAllTodos();
   }
 
   getAllTodos(): void{

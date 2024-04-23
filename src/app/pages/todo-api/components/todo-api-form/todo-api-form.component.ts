@@ -16,8 +16,8 @@ export class TodoApiFormComponent implements OnInit{
 
   todo: TodoApiModel;
   isAdded: boolean = false;
-  message: string = "belum ada todo ditambahkan"
-  @Output() isRefresh: boolean = false;
+  message: string = 'Belum ada Todo Ditambahkan';
+  alertIsShow: boolean = false;
 
   constructor(
     private readonly todoApiService: TodoApiService,
@@ -39,21 +39,11 @@ export class TodoApiFormComponent implements OnInit{
   ngOnInit(): void {
     this.activatedRoute.params.pipe(
       map((params: Params) => {
-        console.log("params ",params);
         return params['id'] ? params['id'] : null;
       })
     ).subscribe( id => {
         if (id != null) {
-          this.todoApiService.getById(id)
-            .subscribe(
-              {
-                next: response => {
-                  this.isAdded = true;
-                  this.todo = response.data;
-                  this.setFormValue();
-                }
-              }
-            )
+          this.getTodoById(id);
         }
       }
     )
@@ -67,16 +57,48 @@ export class TodoApiFormComponent implements OnInit{
 
   onSubmit(): void {
     this.todo = this.todoForm.value;
-    this.todoApiService.createTodo(this.todo)
+    if (this.todo.id == null) {
+      this.todoApiService.createTodo(this.todo)
+        .subscribe({
+          next: () => {
+            this.commonService.sendUpdate("refresh component");
+            this.alertIsShow = true;
+            this.message = 'Todo berhasil ditambahkan';
+            this.todoForm.reset();
+            setTimeout(() => {
+              this.alertIsShow = false;
+            }, 1000);
+          },
+          error: err => console.log(err)
+        });
+    } else {
+      this.todoApiService.updateTodo(this.todo)
+        .subscribe(
+          {
+            next: () => {
+              this.commonService.sendUpdate("refresh component")
+              this.alertIsShow = true;
+              this.message = 'Todo berhasil diupdate';
+              this.todoForm.reset();
+              setTimeout(() => {
+                this.alertIsShow = false;
+              }, 1000);
+            }, 
+            error: err => console.log(err)
+          }
+        );
+    }
+  }
+
+  getTodoById(id: string) {
+    this.todoApiService.getById(id)
       .subscribe({
-        next: response => {
-          console.log(response);
-        },
-        error: err => console.log(err),
-        complete: () => {
-          this.commonService.sendUpdate("refresh todolist api page")
-        }
-      })
+          next: response => {
+            this.isAdded = true;
+            this.todo = response.data;
+            this.setFormValue();
+          }
+        });
   }
 
 }

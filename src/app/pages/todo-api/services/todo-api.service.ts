@@ -54,4 +54,13 @@ export class TodoApiService {
         })
       )
   }
+
+  public updateTodo(todo: TodoApiModel): Observable<ApiResponse<TodoApiModel>> {
+    return this.http.patch<ApiResponse<TodoApiModel>>(CodeService.UPDATE_TODO + `${todo.id}`, todo)
+    .pipe(
+      catchError(err => {
+        throw err;
+      })
+    )
+  }
 }
